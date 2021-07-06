@@ -20,6 +20,7 @@ public class CreateAccActivity extends AppCompatActivity {
     public static final String TAG = "CreateAccActivity";
     EditText etUsername;
     EditText etPassword;
+    EditText etEmail;
     Button btnCreateUser;
 
     @Override
@@ -29,6 +30,7 @@ public class CreateAccActivity extends AppCompatActivity {
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
+        etEmail = findViewById(R.id.etEmail);
         btnCreateUser = findViewById(R.id.btnCreateUser);
 
         btnCreateUser.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +39,7 @@ public class CreateAccActivity extends AppCompatActivity {
                 Log.i(TAG, "onClick login button");
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
-                String email = btnCreateUser.getText().toString();
+                String email = etEmail.getText().toString();
                 createUser(username, password, email);
             }
         });
