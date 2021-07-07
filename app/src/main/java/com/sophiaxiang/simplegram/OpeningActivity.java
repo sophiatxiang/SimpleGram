@@ -19,6 +19,7 @@ public class OpeningActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opening);
 
+        // if already logged in, go straight to main activity
         if (ParseUser.getCurrentUser() != null) {
             goMainActivity();
         }
@@ -27,16 +28,19 @@ public class OpeningActivity extends AppCompatActivity {
         btnCreateAccount = findViewById(R.id.btnCreateAccount);
     }
 
+    // if btnLogin is clicked, launch Login activity
     public void launchLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
+    // if btnCreateAccount is clicked, launch create account activity
     public void launchCreateAccount(View view) {
         Intent intent = new Intent(this, CreateAccActivity.class);
         startActivity(intent);
     }
 
+    // launches main activity and finishes/closes opening activity
     private void goMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

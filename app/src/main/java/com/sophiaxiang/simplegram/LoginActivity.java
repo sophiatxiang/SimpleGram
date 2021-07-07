@@ -46,24 +46,26 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    // attempt to log in Parse user with inputted credentials
     private void loginUser(String username, String password) {
         Log.i(TAG, "attempting to login user " + username);
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
+                // if login fails, notify user
                 if (e != null) {
                     Log.e(TAG, "Issue with login", e);
                     Toast.makeText(LoginActivity.this, "Issue with login!",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // TODO: navigate to the main activity if the user has signed in properly
+                // else open main activity
                 goMainActivity();
                 Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-
+    // go to main activity and close/finish login activity
     private void goMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

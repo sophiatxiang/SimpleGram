@@ -1,6 +1,8 @@
 package com.sophiaxiang.simplegram;
 
 import com.parse.Parse;
+import com.parse.ParseObject;
+
 import android.app.Application;
 
 public class SimpleGramApplication extends Application {
@@ -9,6 +11,9 @@ public class SimpleGramApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // register the parse model
+        ParseObject.registerSubclass(Post.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("fSxM58al7RnMcOp7vwFyxRpduHsEO5aqkxasmniz")

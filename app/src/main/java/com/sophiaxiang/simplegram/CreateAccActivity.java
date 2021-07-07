@@ -57,7 +57,7 @@ public class CreateAccActivity extends AppCompatActivity {
 
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
-                // if user creation succeeds
+                // if user creation succeeds, go to login activity
                 if (e == null) {
                     goLoginActivity();
                     Toast.makeText(CreateAccActivity.this, "Success!", Toast.LENGTH_SHORT).show();
@@ -72,7 +72,7 @@ public class CreateAccActivity extends AppCompatActivity {
         });
     }
 
-    // go to login
+    // go to login activity
     private void goLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
