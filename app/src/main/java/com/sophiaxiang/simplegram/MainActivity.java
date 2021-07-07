@@ -195,4 +195,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    // opens FeedActivity when "View Feed" button is clicked
+    public void onViewFeed(View view) {
+        Intent intent = new Intent(this, FeedActivity.class);
+        startActivity(intent);
+    }
 }
