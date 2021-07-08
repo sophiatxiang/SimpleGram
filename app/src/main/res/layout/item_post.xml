@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/linearLayout">
+    android:layout_marginBottom="10dp">
 
     <TextView
         android:id="@+id/tvUsername"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -19,6 +19,7 @@
 
     <ImageView
         android:id="@+id/ivImage"
+        android:layout_below="@id/tvUsername"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="5dp"
@@ -26,21 +27,80 @@
         android:scaleType="centerCrop"
         tools:srcCompat="@tools:sample/avatars" />
 
+
+    <ImageButton
+        android:id="@+id/ibLike"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:scaleType="fitXY"
+        android:layout_below="@id/ivImage"
+        app:srcCompat="@drawable/ufi_heart" />
+
+    <ImageButton
+        android:id="@+id/ibComment"
+        android:layout_below="@id/ivImage"
+        android:layout_toRightOf="@id/ibLike"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ufi_comment"/>
+
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ibLike"
         android:layout_marginStart="10dp"
         android:text="captions are so hard"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black" />
 
 
     <TextView
         android:id="@+id/tvTime"
+        android:layout_below="@id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="3 hours ago" />
 
+    <ImageButton
+        android:id="@+id/ibDm"
+        android:layout_below="@id/ivImage"
+        android:layout_toRightOf="@id/ibComment"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ufi_new_direct"/>
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/ibSave"
+        android:layout_below="@id/ivImage"
+        android:layout_alignParentEnd="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/white"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/save_button"/>
+
+    <ImageButton
+        android:id="@+id/ibDots"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:scaleType="fitXY"
+        android:layout_margin="12dp"
+        android:background="@color/white"
+        app:srcCompat="@drawable/dots" />
+
+</RelativeLayout>

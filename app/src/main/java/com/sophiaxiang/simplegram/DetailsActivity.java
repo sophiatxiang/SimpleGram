@@ -40,5 +40,6 @@ public class DetailsActivity extends AppCompatActivity {
         tvDescription.setText(description);
         tvUsername.setText(username);
         tvTime.setText(time);
+
     }
 }

@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <include
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
@@ -16,6 +21,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:onClick="onLogoutButton"
+        android:backgroundTint="@color/blue_login"
         android:text="Logout" />
 
     <Button
@@ -27,15 +33,17 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:onClick="onViewFeed"
-        android:text="View Feed" />
+        android:text="View Feed"
+        android:backgroundTint="@color/blue_login"/>
 
     <Button
         android:id="@+id/btnCaptureImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/blue_login"
+        android:layout_below="@id/toolbar"
         android:text="Take picture" />
 
     <ImageView
@@ -54,6 +62,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"
+        android:backgroundTint="@color/blue_login"
         android:text="Post" />
 
     <EditText

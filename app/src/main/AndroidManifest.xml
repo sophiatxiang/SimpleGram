@@ -9,7 +9,7 @@
         android:name=".SimpleGramApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon"
-        android:label="@string/app_name"
+        android:label=""
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleGram"
