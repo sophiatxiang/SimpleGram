@@ -29,10 +29,8 @@ import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-import com.sophiaxiang.simplegram.FeedActivity;
-import com.sophiaxiang.simplegram.MainActivity;
 import com.sophiaxiang.simplegram.OpeningActivity;
-import com.sophiaxiang.simplegram.Post;
+import com.sophiaxiang.simplegram.models.Post;
 import com.sophiaxiang.simplegram.R;
 
 import java.io.File;

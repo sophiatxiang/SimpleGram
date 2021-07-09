@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
 import com.sophiaxiang.simplegram.DetailsActivity;
-import com.sophiaxiang.simplegram.Post;
+import com.sophiaxiang.simplegram.models.Post;
 import com.sophiaxiang.simplegram.R;
 
 import java.util.List;

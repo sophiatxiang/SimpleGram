@@ -19,7 +19,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.sophiaxiang.simplegram.EndlessRecyclerViewScrollListener;
-import com.sophiaxiang.simplegram.Post;
+import com.sophiaxiang.simplegram.models.Post;
 import com.sophiaxiang.simplegram.adapters.PostsAdapter;
 import com.sophiaxiang.simplegram.R;
 

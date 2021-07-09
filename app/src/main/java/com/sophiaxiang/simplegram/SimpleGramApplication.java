@@ -2,6 +2,7 @@ package com.sophiaxiang.simplegram;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.sophiaxiang.simplegram.models.Post;
 
 import android.app.Application;
 

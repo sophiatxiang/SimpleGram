@@ -15,7 +15,7 @@
         android:theme="@style/Theme.SimpleGram"
         android:usesCleartextTraffic="true">
         <activity android:name=".DetailsActivity"></activity>
-        <activity android:name=".FeedActivity" />
+        <activity android:name=".unusedActivities.FeedActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -1,4 +1,4 @@
-package com.sophiaxiang.simplegram;
+package com.sophiaxiang.simplegram.unusedActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +11,8 @@ import android.util.Log;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.sophiaxiang.simplegram.models.Post;
+import com.sophiaxiang.simplegram.R;
 import com.sophiaxiang.simplegram.adapters.PostsAdapter;
 
 import java.util.ArrayList;

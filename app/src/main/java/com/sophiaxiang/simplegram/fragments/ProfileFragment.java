@@ -2,21 +2,25 @@ package com.sophiaxiang.simplegram.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.sophiaxiang.simplegram.EndlessRecyclerViewScrollListener;
-import com.sophiaxiang.simplegram.Post;
+import com.sophiaxiang.simplegram.models.Post;
 import com.sophiaxiang.simplegram.adapters.ProfileAdapter;
 import com.sophiaxiang.simplegram.R;
 
@@ -25,13 +29,27 @@ import java.util.List;
 
 public class ProfileFragment extends PostsFragment {
 
+    public static final String KEY_PROFILE_PIC = "profilePicture";
     protected ProfileAdapter adapter;
-    private String username;
+    private ImageView ivProfileImage;
+    private String profileImageUrl;
+    private TextView tvName;
+    private TextView tvNumPosts;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_profile, container, false);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvPosts = view.findViewById(R.id.rvPosts);
+        ivProfileImage = view.findViewById(R.id.ivProfileImage);
+        tvName = view.findViewById(R.id.tvName);
+        tvNumPosts = view.findViewById(R.id.tvNumPosts);
 
         allPosts = new ArrayList<>();
         adapter = new ProfileAdapter(getContext(), allPosts);
@@ -60,8 +78,6 @@ public class ProfileFragment extends PostsFragment {
 
         // set toolbar as the action bar in this activity
         androidx.appcompat.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
-        toolbar.findViewById(R.id.ivLogoToolbar).setVisibility(View.GONE);
-        toolbar.setTitle(username);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
     }
 
@@ -70,7 +86,6 @@ public class ProfileFragment extends PostsFragment {
     // query only the posts created by the current user
     @Override
     protected void queryPosts() {
-        username = ParseUser.getCurrentUser().getUsername();
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
@@ -91,6 +106,14 @@ public class ProfileFragment extends PostsFragment {
                 // save received posts to list and notify adapter of new data
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
+
+                ParseFile profileImage = ParseUser.getCurrentUser().getParseFile(KEY_PROFILE_PIC);
+                if (profileImage != null) {
+                    profileImageUrl = profileImage.getUrl();
+                    Glide.with(getContext()).load(profileImageUrl).circleCrop().into(ivProfileImage);
+                }
+                tvName.setText(ParseUser.getCurrentUser().getUsername());
+                tvNumPosts.setText("" + allPosts.size());
             }
         });
     }

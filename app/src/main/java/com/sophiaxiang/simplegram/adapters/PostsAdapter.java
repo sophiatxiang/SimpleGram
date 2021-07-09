@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
 import com.sophiaxiang.simplegram.DetailsActivity;
-import com.sophiaxiang.simplegram.Post;
+import com.sophiaxiang.simplegram.models.Post;
 import com.sophiaxiang.simplegram.R;
 
 import java.util.List;
@@ -62,6 +62,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvTime;
         private boolean hasImage;
         private String imageUrl;
+        private ImageView ivProfilePic;
+        private boolean hasProfileImage;
+        private String profileImageUrl;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +72,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvTime = itemView.findViewById(R.id.tvTime);
+            ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
             itemView.setOnClickListener(this);
         }
 
@@ -83,6 +87,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context).load(imageUrl).into(ivImage);
             }
             else hasImage = false;
+
+            ParseFile profileImage = post.getProfileImage();
+            if (profileImage != null) {
+                hasProfileImage = true;
+                profileImageUrl = profileImage.getUrl();
+                Glide.with(context).load(profileImageUrl).circleCrop().into(ivProfilePic);
+            }
+            else hasProfileImage = false;
 
             String timeAgo = Post.calculateTimeAgo(post.getCreatedAt());
             tvTime.setText(timeAgo);
@@ -101,10 +113,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 intent.putExtra("username", tvUsername.getText());
                 intent.putExtra("description", tvDescription.getText());
                 intent.putExtra("time", tvTime.getText());
-                if (hasImage == true) {
+                if (hasImage) {
                     intent.putExtra("imageUrl", imageUrl);
                     intent.putExtra("hasImage", true);
                 } else intent.putExtra("hasImage", false);
+
+                if (hasProfileImage) {
+                    intent.putExtra("profileImageUrl", profileImageUrl);
+                    intent.putExtra("hasProfileImage", true);
+                } else intent.putExtra("hasProfileImage", false);
                 context.startActivity(intent);
             }
         }
