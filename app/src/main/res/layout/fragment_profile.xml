@@ -89,7 +89,6 @@
         android:layout_marginEnd="230dp"
         android:layout_marginBottom="-6dp"
         android:gravity="center"
-        android:text="10"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
         android:textStyle="bold" />

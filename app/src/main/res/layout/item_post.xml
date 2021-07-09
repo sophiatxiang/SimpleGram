@@ -7,21 +7,12 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp">
 
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@id/ivProfilePic"
-        android:text="Sophia"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@id/ivProfilePic"
+        android:layout_below="@id/rlUser"
         android:layout_marginBottom="5dp"
         android:scaleType="centerCrop"
         tools:srcCompat="@tools:sample/avatars" />
@@ -91,26 +82,44 @@
         android:scaleType="fitXY"
         app:srcCompat="@drawable/save_button"/>
 
-    <ImageButton
-        android:id="@+id/ibDots"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:scaleType="fitXY"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/white"
-        app:srcCompat="@drawable/dots" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlUser">
 
-    <ImageView
-        android:id="@+id/ivProfilePic"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
-        tools:srcCompat="@tools:sample/avatars"
-        android:scaleType="centerCrop"/>
+        <ImageButton
+            android:id="@+id/ibDots"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitXY"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/white"
+            app:srcCompat="@drawable/dots" />
+
+        <ImageView
+            android:id="@+id/ivProfilePic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            tools:srcCompat="@tools:sample/avatars"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/ivProfilePic"
+            android:text="Sophia"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

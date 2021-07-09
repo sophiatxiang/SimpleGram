@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleGram"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".UserDetails"></activity>
+        <activity android:name=".DetailsActivity" />
         <activity android:name=".unusedActivities.FeedActivity" />
 
         <provider

@@ -2,21 +2,30 @@ package com.sophiaxiang.simplegram.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
 import com.sophiaxiang.simplegram.DetailsActivity;
+import com.sophiaxiang.simplegram.fragments.UserDetailsFragment;
 import com.sophiaxiang.simplegram.models.Post;
 import com.sophiaxiang.simplegram.R;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -65,14 +74,31 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private ImageView ivProfilePic;
         private boolean hasProfileImage;
         private String profileImageUrl;
+        private RelativeLayout rlUser;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            rlUser = itemView.findViewById(R.id.rlUser);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvTime = itemView.findViewById(R.id.tvTime);
             ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
+            rlUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AppCompatActivity activity = (AppCompatActivity)context;
+                    Fragment nextFrag= new UserDetailsFragment();
+                    Bundle bundle = new Bundle();
+                    Post post = posts.get(getAdapterPosition());
+                    bundle.putSerializable("post", post);
+                    nextFrag.setArguments(bundle);
+                    activity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.flContainer, nextFrag)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
             itemView.setOnClickListener(this);
         }
 
