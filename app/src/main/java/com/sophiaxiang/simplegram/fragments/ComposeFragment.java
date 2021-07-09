@@ -48,6 +48,7 @@ public class ComposeFragment extends Fragment {
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
+    private Button btnLogout;
     private File photoFile;
     public String photoFileName = "photo.jpg";
 
@@ -55,17 +56,13 @@ public class ComposeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // the onCreateView method is called when fragment should create its View object hierarchy
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_compose, container, false);
     }
 
 
-    // This event is triggered soon after onCreateView().
-    // any view set up should occur here. E.g., view lookups and attaching view listeners
     @Override
     public void onViewCreated(@NonNull  View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -73,6 +70,7 @@ public class ComposeFragment extends Fragment {
         btnCaptureImage = view.findViewById(R.id.btnCaptureImage);
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnSubmit = view.findViewById(R.id.btnSubmit);
+        btnLogout = view.findViewById(R.id.btnLogout);
 
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +79,7 @@ public class ComposeFragment extends Fragment {
                 launchCamera();
             }
         });
+
 
         // if button is clicked, attempt to make new post
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -100,13 +99,21 @@ public class ComposeFragment extends Fragment {
             }
         });
 
-        // Find the toolbar view inside the activity layout
-        androidx.appcompat.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
+        // when logout button is clicked, log out and call goOpeningActivity to return to login/create acc
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOut();
+                //ParseUser currentUser = ParseUser.getCurrentUser();
+                Toast.makeText(getActivity(), "Logout success!", Toast.LENGTH_SHORT).show();
+                goOpeningActivity();
+            }
+        });
+
         // Sets the Toolbar to act as the ActionBar for this Activity window.
-        // Make sure the toolbar exists in the activity and is not null
+        androidx.appcompat.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
     }
-
 
 
     // launch camera application with implicit intent
@@ -209,25 +216,10 @@ public class ComposeFragment extends Fragment {
     }
 
 
-    // when logout button is clicked, log out and call goOpeningActivity to return to login/create acc
-    public void onLogoutButton(View view) {
-        ParseUser.logOut();
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        Toast.makeText(getActivity(), "Logout success!", Toast.LENGTH_SHORT).show();
-        goOpeningActivity();
-    }
-
-
     // returns to opening activity screen (login/create acc activity)
     private void goOpeningActivity() {
         Intent intent = new Intent(getActivity(), OpeningActivity.class);
         startActivity(intent);
         getActivity().finish();
-    }
-
-    // opens FeedActivity when "View Feed" button is clicked
-    public void onViewFeed(View view) {
-        Intent intent = new Intent(getActivity(), FeedActivity.class);
-        getActivity().startActivity(intent);
     }
 }

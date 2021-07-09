@@ -20,7 +20,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.sophiaxiang.simplegram.EndlessRecyclerViewScrollListener;
 import com.sophiaxiang.simplegram.Post;
-import com.sophiaxiang.simplegram.PostsAdapter;
+import com.sophiaxiang.simplegram.adapters.PostsAdapter;
 import com.sophiaxiang.simplegram.R;
 
 import java.util.ArrayList;
@@ -29,11 +29,11 @@ import java.util.List;
 public class PostsFragment extends Fragment {
 
     public static final String TAG = "PostsFragment";
-    private RecyclerView rvPosts;
-    protected PostsAdapter adapter;
+    protected RecyclerView rvPosts;
+    private PostsAdapter adapter;
     protected List<Post> allPosts;
-    private SwipeRefreshLayout swipeContainer;
-    private EndlessRecyclerViewScrollListener scrollListener;
+    protected SwipeRefreshLayout swipeContainer;
+    protected EndlessRecyclerViewScrollListener scrollListener;
 
     public PostsFragment() {
         // Required empty public constructor
@@ -60,7 +60,7 @@ public class PostsFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvPosts.setLayoutManager(linearLayoutManager);
 
-        queryPosts(0);
+        queryPosts();
 
         // Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
@@ -71,11 +71,10 @@ public class PostsFragment extends Fragment {
                 // Your code to refresh the list here.
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
-                queryPosts(1);
+                queryPosts();
                 swipeContainer.setRefreshing(false);
                 scrollListener.resetState();
             }
-
         });
 
         // Retain an instance so that you can call `resetState()` for fresh searches
@@ -95,14 +94,10 @@ public class PostsFragment extends Fragment {
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
     }
 
-    // Append the next page of data into the adapter
-    // This method probably sends out a network request and appends new data items to your adapter.
+
+    // queries posts from the Parse database for infinite scrolling
+    // starts at the post in the next position
     public void loadNextDataFromApi(int offset) {
-        // Send an API request to retrieve appropriate paginated data
-        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
-        //  --> Deserialize and construct new model objects from the API response
-        //  --> Append the new data objects to the existing set of items inside the array of items
-        //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()`
         int tempSize = allPosts.size();
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
@@ -127,9 +122,8 @@ public class PostsFragment extends Fragment {
     }
 
 
-    // get 20 posts from the Parse database
-    // i == 1 if calling from refresh -> adapter should be cleared before adding all posts
-    protected void queryPosts(int i) {
+    // gets posts from the Parse database
+    protected void queryPosts() {
         // specify what type of data we want to query - Post.class
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // include data referred by user key
@@ -146,9 +140,7 @@ public class PostsFragment extends Fragment {
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                 }
-                if (i == 1) {
                     adapter.clear();
-                }
                 for (Post post: posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }

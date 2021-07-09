@@ -19,20 +19,9 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:onClick="onLogoutButton"
-        android:backgroundTint="@color/blue_login"
+        android:backgroundTint="@color/grey"
         android:text="Logout" />
 
-    <Button
-        android:id="@+id/btnFeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:onClick="onViewFeed"
-        android:text="View Feed"
-        android:backgroundTint="@color/blue_login"/>
 
     <Button
         android:id="@+id/btnCaptureImage"
@@ -40,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/blue_login"
+        android:backgroundTint="@color/grey"
         android:layout_below="@id/toolbar"
         android:text="Take picture" />
 
@@ -60,7 +49,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"
-        android:backgroundTint="@color/blue_login"
+        android:backgroundTint="@color/grey"
         android:text="Post" />
 
     <EditText
