@@ -3,9 +3,11 @@ package com.sophiaxiang.simplegram.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,6 +30,8 @@ import com.sophiaxiang.simplegram.R;
 import org.parceler.Parcels;
 
 import java.util.List;
+
+import okhttp3.Headers;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
     private Context context;
@@ -75,6 +79,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private boolean hasProfileImage;
         private String profileImageUrl;
         private RelativeLayout rlUser;
+        private ImageButton ibLike;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,11 +89,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvTime = itemView.findViewById(R.id.tvTime);
             ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
+            ibLike = itemView.findViewById(R.id.ibLike);
             rlUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AppCompatActivity activity = (AppCompatActivity)context;
-                    Fragment nextFrag= new UserDetailsFragment();
+                    AppCompatActivity activity = (AppCompatActivity) context;
+                    Fragment nextFrag = new UserDetailsFragment();
                     Bundle bundle = new Bundle();
                     Post post = posts.get(getAdapterPosition());
                     bundle.putSerializable("post", post);
@@ -111,16 +117,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 hasImage = true;
                 imageUrl = image.getUrl();
                 Glide.with(context).load(imageUrl).into(ivImage);
-            }
-            else hasImage = false;
+            } else hasImage = false;
 
             ParseFile profileImage = post.getProfileImage();
             if (profileImage != null) {
                 hasProfileImage = true;
                 profileImageUrl = profileImage.getUrl();
                 Glide.with(context).load(profileImageUrl).circleCrop().into(ivProfilePic);
-            }
-            else hasProfileImage = false;
+            } else hasProfileImage = false;
 
             String timeAgo = Post.calculateTimeAgo(post.getCreatedAt());
             tvTime.setText(timeAgo);
@@ -128,7 +132,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         // if ViewHolder is clicked, launch post details screen
         @Override
-        public void onClick(View v) {
+        public void onClick (View v) {
             Toast.makeText(context, "CLICKED", Toast.LENGTH_SHORT).show();
             // gets item position
             int position = getAdapterPosition();

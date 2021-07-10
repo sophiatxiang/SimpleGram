@@ -20,6 +20,11 @@ public class Post extends ParseObject implements Serializable {
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
     public static final String KEY_PROFILE_PIC = "profilePicture";
+    public static final String KEY_LIKES = "likes";
+
+    public int getNumLikes() {
+        return getList(KEY_LIKES).size();
+    }
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);

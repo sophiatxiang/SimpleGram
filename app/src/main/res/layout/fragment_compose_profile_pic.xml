@@ -10,17 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/grey"
-        android:text="Logout" />
-
 
     <Button
         android:id="@+id/btnCaptureImage"
@@ -49,15 +38,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"
         android:backgroundTint="@color/grey"
-        android:text="Post" />
+        android:text="Update" />
 
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnSubmit"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:ems="10"
-        android:hint="Write a caption..." />
 </RelativeLayout>

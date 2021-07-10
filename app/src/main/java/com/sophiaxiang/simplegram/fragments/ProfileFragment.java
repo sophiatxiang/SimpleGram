@@ -5,12 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -35,6 +37,7 @@ public class ProfileFragment extends PostsFragment {
     protected String profileImageUrl;
     protected TextView tvName;
     protected TextView tvNumPosts;
+    private Button btnChange;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +53,7 @@ public class ProfileFragment extends PostsFragment {
         ivProfileImage = view.findViewById(R.id.ivProfileImage);
         tvName = view.findViewById(R.id.tvName);
         tvNumPosts = view.findViewById(R.id.tvNumPosts);
+        btnChange = view.findViewById(R.id.btnChangeProfile);
 
         allPosts = new ArrayList<>();
         adapter = new ProfileAdapter(getContext(), allPosts);
@@ -73,6 +77,18 @@ public class ProfileFragment extends PostsFragment {
                 queryPosts();
                 swipeContainer.setRefreshing(false);
                 scrollListener.resetState();
+            }
+        });
+
+        btnChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) getContext();
+                Fragment nextFrag = new ComposeProfilePicFragment();
+                activity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.flContainer, nextFrag)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
